@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SesiController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +29,10 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/guru', [GuruController::class,'index']);
 
 Route::middleware(['guest'])->group(function(){
-    Route::get('/', [SesiController::class,'index']);
-    Route::post('/', [SesiController::class,'login']);
+    Route::get('/login', [SesiController::class,'index']);
+    Route::post('/login', [SesiController::class,'login']);
+    Route::get('/', [HomeController::class,'index']);
+    Route::get('/', [HomeController::class, 'search'])->name('search');
 });
 
 Route::middleware(['auth'])->group(function () {
