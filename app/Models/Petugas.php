@@ -39,4 +39,9 @@ class petugas extends Authenticatable
         'username_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function tanggapan():HasMany
+    {
+        return $this->hasMany(Tanggapan::class,'id_petugas','id_petugas');
+    }
 }

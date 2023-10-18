@@ -36,7 +36,7 @@ class SesiController extends Controller
                     return redirect('/guru');
                 }
             }else{ //jika gagal
-            return redirect('')->withErrors('username dan password salah')->withInput();
+            return redirect()->back()->withErrors('username dan password salah')->withInput();
             
         }
     }

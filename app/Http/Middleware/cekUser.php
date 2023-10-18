@@ -23,7 +23,18 @@ class cekUser
             $user = Auth::user();
             
             if($user->level == $roles){
-            return $next($request);
+            // return $next($request);
+            $response = $next($request);
+            $headers =[
+            'Cache-Control' =>'nocache, no-store, max-age=0, must-revalidate',
+            'Pragma','no-cache',
+            'Expires','Fri, 01 Jan 1990 00:00:00 GMT',
+            ];
+            foreach($headers as $key => $value){
+            $response->headers->set($key,$value);
+            }
+            return $response;
+
             }else{
             
             return redirect('/')->withErrors('Anda harus login terlebih dahulu');

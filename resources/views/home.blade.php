@@ -27,9 +27,6 @@
 
                 <th>Tanggal</th>
                 <th>Pelanggaran</th>
-
-                <th>Foto</th>
-            </tr>
         </thead>
     <tbody>
     <?php $no=1;?>
@@ -37,11 +34,10 @@
     <tr>
         <td>{{ $no++ }}</td>
         <td>{{ $dt->nis }}</td>
-        <td>nanti pakai eloquent</td>
-        <td>nanti pakai eloquent</td>
+        <td>{{ $dt->siswa->nama }}</td>
+        <td>{{ $dt->siswa->kelas }}</td>
         <td>{{ $dt->tgl_pelanggaran }}</td>
         <td>{{ $dt->isi_pelanggaran }}</td>
-        <td colspan="4">Edit Del</td>
     </tr>
     @endforeach
     </tbody>

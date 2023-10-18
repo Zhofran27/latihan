@@ -4,6 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\PelanggaranController;
+use App\Http\Controllers\TanggapanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/guru', [GuruController::class,'index']);
 
 Route::middleware(['guest'])->group(function(){
-    Route::get('/login', [SesiController::class,'index']);
+    Route::get('/login', [SesiController::class,'index'])->name('login');
     Route::post('/login', [SesiController::class,'login']);
     Route::get('/', [HomeController::class,'index']);
     Route::get('/', [HomeController::class, 'search'])->name('search');
@@ -40,9 +44,19 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/guru', [GuruController::class,'index']);
     Route::get('/logout',[SesiController::class,'logout']);
     Route::group(['middleware' => ['cekUser:admin']], function () {
-        Route::resource('/admin', AdminController::class);
+        Route::get('/admin', [AdminController::class,'index']);
+        Route::resource('/admin/siswa',SiswaController::class);
+        Route::resource('/admin/petugas',PetugasController::class);
+        Route::resource('/admin/pelanggaran',PelanggaranController::class);
+        Route::resource('/admin/tanggapan',TanggapanController::class);
         });
     Route::group(['middleware' => ['cekUser:gurubk']], function () {
-        Route::resource('/guru', GuruController::class);
+        Route::get('/guru', [GuruController::class,'index']);
+        Route::resource('/guru/siswa',SiswaController::class);
+        Route::resource('/guru/petugas',PetugasController::class);
+        Route::resource('/guru/pelanggaran',PelanggaranController::class);
+        Route::resource('/guru/tanggapan',TanggapanController::class);
+
+        Route::get('/guru/siswa', [SiswaController::class, 'search'])->name('search');
         });
 });

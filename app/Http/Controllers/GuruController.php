@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
+    public function __construct()
+    {
+    $this->middleware('auth');
+    }
+
     function index(){
         // echo 'Selamat datang';
         
