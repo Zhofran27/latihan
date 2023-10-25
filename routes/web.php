@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/admin/petugas',PetugasController::class);
         Route::resource('/admin/pelanggaran',PelanggaranController::class);
         Route::resource('/admin/tanggapan',TanggapanController::class);
+
+        Route::delete('/admin/petugas/{id}',[PetugasController::class,'destroy']);
+        Route::get('/admin/petugas/{id}',[PetugasController::class,'edit']);
+        Route::put('/admin/petugas/{id}',[PetugasController::class,'update']);
         });
     Route::group(['middleware' => ['cekUser:gurubk']], function () {
         Route::get('/guru', [GuruController::class,'index']);

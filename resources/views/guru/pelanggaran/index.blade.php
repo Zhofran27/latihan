@@ -42,6 +42,8 @@
                         </td>
 					</tr> @endforeach </tbody>
 		</table>
-	</div> {{--
-	<div class="d-flex justify-content-right"> {{!! $dt->links() !!}} </div> --}} @else
-	<p>Tidak ada Data</p> @endif @include('layouts.footer')
+	</div> 
+	{{--<div class="d-flex justify-content-right"> {{!! $dt->links() !!}} </div> --}} @else
+	<p>Tidak ada Data</p> 
+	@endif 
+	@include('layouts.footer')

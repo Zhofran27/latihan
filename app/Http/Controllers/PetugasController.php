@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Petugas;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class PetugasController extends Controller
@@ -63,14 +64,12 @@ class PetugasController extends Controller
 
         if($simpan){
             //redirect dengan pesan sukses
-        return redirect('/admin/petugas')->with(['success'=> 'Data Sukses
-
-        Disimpan']);
+        Alert::success('Simpan Data', 'data petugas berhasil disimpan');
+        return redirect('/admin/petugas');
         }else{
             //redirect dengan pesan error
-        return redirect('/admin/petugas')->with(['error' => 'Data Gagal
-
-        Disimpan!']);
+            Alert::error('Simpan Data', 'data petugas gagal disimpan');
+        return redirect('/admin/petugas');
         }
     }
 
@@ -85,9 +84,12 @@ class PetugasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+    //
+    $data=Petugas::find($id);
+    //ubah adalah pengambilan data dari variabel $ubah, namanya harus sama
+    return view('admin.petugas.index',compact(['data']));
     }
 
     /**
@@ -95,7 +97,35 @@ class PetugasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $upd = Petugas::find($id);
+        if($request->password==""){
+            $upd->update([
+                'id' => $request->id,
+                'id_petugas' => $request->id_petugas,
+                'nama' => $request->nama,
+                'username' => $request->username,
+                'level' => $request->level,
+                'telp' => $request->telp,
+            ]);
+        }else{
+        $upd->update([
+            'id' => $request->id,
+            'id_petugas' => $request->id_petugas,
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+            'level' => $request->level,
+
+            'telp' => $request->telp,
+        ]);
+        }
+        if($upd){
+        Alert::success('Ubah Data', 'data petugas berhasil diubah');
+        return redirect('/admin/petugas');
+        }else{
+        Alert::success('Ubah Data', 'data petugas berhasil diubah');
+        return redirect('/admin/petugas');
+        }
     }
 
     /**
@@ -103,6 +133,16 @@ class PetugasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+            //return dd($id);
+            $del=Petugas::find($id);
+            $del->delete(); //perintah untuk hapus
+            if($del){
+            Alert::success('Hapus Data', 'data petugas berhasil dihapus');
+            return redirect('/admin/petugas');
+            }else{
+            //redirect dengan pesan error
+            Alert::error('Hapus Data', 'data petugas gagal dihapus');
+            return redirect('/admin/petugas');
+            }
     }
 }
