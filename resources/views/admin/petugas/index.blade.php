@@ -147,7 +147,9 @@
 	</div> 
 	@endforeach
 
-<!-- Modal ubah --> @foreach($data as $dt) <div class="modal fade" id="ubah{{$dt->id}}" tabindex="-1" data-bs- backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal ubah --> 
+@foreach($data as $dt) 
+<div class="modal fade" id="ubah{{$dt->id}}" tabindex="-1" data-bs- backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
 		<div class="modal-content">
 		  <div class="modal-header bg-success text-white">
@@ -155,7 +157,10 @@
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
 		  <div class="modal-body">
-			<form id="create-depot-form" action="/admin/petugas/{{$dt->id}}" method="POST"> @csrf @method('PUT') <input type="hidden" name="id" value="{{$dt->id}}">
+			<form id="create-depot-form" action="/admin/petugas/{{$dt->id}}" method="POST"> 
+				@csrf 
+				@method('PUT') 
+				<input type="hidden" name="id" value="{{$dt->id}}">
 			  <div class="row g-1">
 				<div class="col-md">
 				  <div class="form-floating">
@@ -176,10 +181,10 @@
 				  <div class="form-floating">
 					<select class="form-select" name="level">
 					  <option value="{{ $dt->level }}"">
-	{{ $dt->level }}
-	</option>
-														<hr>
-															<option value=" admin">Admin</option>
+						{{ $dt->level }}
+					  </option>
+					<hr>
+					  <option value=" admin">Admin</option>
 					  <option value="gurubk">Guru BK</option>
 					</select>
 					<label for="floatingSelectGrid">Level</label>

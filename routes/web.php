@@ -53,6 +53,10 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/petugas/{id}',[PetugasController::class,'destroy']);
         Route::get('/admin/petugas/{id}',[PetugasController::class,'edit']);
         Route::put('/admin/petugas/{id}',[PetugasController::class,'update']);
+
+        Route::delete('/admin/siswa/{id}',[SiswaController::class,'destroy']);
+        Route::get('/admin/siswa/{id}',[SiswaController::class,'edit']);
+        Route::put('/admin/siswa/{id}',[SiswaController::class,'update']);
         });
     Route::group(['middleware' => ['cekUser:gurubk']], function () {
         Route::get('/guru', [GuruController::class,'index']);
