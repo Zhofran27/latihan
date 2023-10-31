@@ -19,7 +19,7 @@ class PelanggaranController extends Controller
     
     function index(){
         $data = Pelanggaran::all();
-        $siswas=Siswa::all();
+        $siswas =Siswa::all();
         $user = Auth::user();
         if ($user->level == 'admin') {
             return view('admin.pelanggaran.index',compact('data'));

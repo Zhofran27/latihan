@@ -22,6 +22,7 @@
 				<th>Kelas</th>
 				<th>Tanggal</th>
 				<th>Pelanggaran</th>
+				<th>Foto</th>
 				<th>Proses Data</th>
 			</tr>
 			</thead>
@@ -34,9 +35,13 @@
 						<td>{{$dt->siswa->kelas}}</td>
 						<td>{{$dt->tgl_pelanggaran}}</td>
 						<td>{{$dt->isi_pelanggaran}}</td>
+						<td>
+							<img src="{{asset('foto/'.$dt->foto)}}" width="40%">
+						</td>
 						<td> <a class="btn btn-warning btn-sm" href="/admin/siswa/edit/{{$dt->id}}"> Ubah </a> 
                              <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapus{{$dt->id}}"> Hapus</a> </td>
-					</tr> @endforeach </tbody>
+					</tr> @endforeach 
+				</tbody>
 		</table>
 	</div> {{--
 	<div class="d-flex justify-content-right"> {{!! $dt->links() !!}} </div> --}} @else
@@ -52,7 +57,8 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<form id="create-depot-form" action="/admin/pelanggaran" method="POST"> @csrf
+				<form id="create-depot-form" action="/admin/pelanggaran" method="POST" enctype="multipart/form-data"> 
+					@csrf
 					<div class="row g-1">
 						<div class="col-md">
 							<div class="form-floating">
@@ -74,7 +80,7 @@
 								<select class="form-select" name="ns">
 									<option selected>Pilih NIS</option>
 									@foreach ($data as $dt)
-									<option value="{{$dt->siswa->nis}}">{{$dt->siswa->nis}}</option>
+									<option value="">{{$dt->siswa->nis}}</option>
 									@endforeach
 								</select>
 								<label for="floatingSelectGrid">NIS</label>
@@ -91,6 +97,11 @@
 						</div>
 					</div>
 					<br>
+					<div class="mb-3">
+						<label class="form-label">Foto </label>
+						<img id="preview-gambar" alt="preview foto" style="max-height: 200px;">
+						<input class="form-control" type="file" name="ft" id="gambar">
+					</div>
 					<br>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs- dismiss="modal">Tutup</button>
@@ -150,17 +161,17 @@
 			   <div class="col-md">
 				 <div class="form-floating">
 				   <input type="text" class="form-control" name="nama" value="{{$dt->nama}}"" >
-												   <label for=" floatingInputGrid">Nama</label>
+					<label for=" floatingInputGrid">Nama</label>
 				 </div>
 			   </div>
 			   <div class="col-md">
 				 <div class="form-floating">
 				   <select class="form-select" name="level">
 					 <option value="{{ $dt->level }}"">
-   {{ $dt->level }}
-   </option>
-													   <hr>
-														   <option value=" admin">Admin</option>
+						{{ $dt->level }}
+						</option>
+					   <hr>
+					<option value=" admin">Admin</option>
 					 <option value="gurubk">Guru BK</option>
 				   </select>
 				   <label for="floatingSelectGrid">Level</label>
@@ -187,10 +198,17 @@
 			   <div class="col-md">
 				 <div class="form-floating">
 				   <input type="text" class="form-control" name="telp" value="{{$dt->telp}}"">
-																		   <label for=" floatingInputGrid">No Telp/HP</label>
+				  <label for=" floatingInputGrid">No Telp/HP</label>
 				 </div>
 			   </div>
 			 </div>
+			 <br>
+			 <div class="mb-3">
+				<label class="form-label">Foto</label>
+				<img id="preview-foto" alt="preview foto" style="max-height: 200px;">
+				<br>
+				<input class="form-control" type="file" name="foto" id="imageUbah">
+			  </div>
 			 <br>
 			 <div class="modal-footer">
 			   <button type="button" class="btn btn-secondary" data-bs- dismiss="modal">Tutup</button>
@@ -201,5 +219,33 @@
 	   </div>
 	 </div>
    </div> 
+
+   <script type="text/javascript">
+	$(document).ready(function (e) {
+  
+	  $('#gambar').change(function() {
+		let reader = new FileReader();
+		reader.onload = (e) => {
+		  $('#preview-gambar').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(this.files[0]);
+	  });
+	});
+  </script>
+  
+  <script type="text/javascript">
+	$(document).ready(function (er) {
+  
+	  $('#imageUbah').change(function() {
+		let reader2 = new FileReader();
+		reader2.onload = (er) => {
+		  $('#preview-foto').attr('src', er.target.result);
+		}
+		reader2.readAsDataURL(this.files[0]);
+	  });
+	});
+  </script>
+  
+
    @endforeach
 	@include('layouts.footer')
