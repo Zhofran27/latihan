@@ -57,6 +57,15 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/siswa/{id}',[SiswaController::class,'destroy']);
         Route::get('/admin/siswa/{id}',[SiswaController::class,'edit']);
         Route::put('/admin/siswa/{id}',[SiswaController::class,'update']);
+
+        Route::delete('/admin/pelanggaran/{id}',[PelanggaranController::class,'destroy']);
+        Route::get('/admin/pelanggaran/{id}',[PelanggaranController::class,'edit']);
+        Route::put('/admin/pelanggaran/{id}',[PelanggaranController::class,'update']);
+        Route::get('/admin/pelanggaran-pdf',[PelanggaranController::class,'view_pdf']);
+
+        Route::delete('/admin/tanggapan/{id}',[TanggapanController::class,'destroy']);
+        Route::get('/admin/tanggapan/{id}',[TanggapanController::class,'edit']);
+        Route::put('/admin/tanggapan/{id}',[TanggapanController::class,'update']);
         });
     Route::group(['middleware' => ['cekUser:gurubk']], function () {
         Route::get('/guru', [GuruController::class,'index']);
@@ -64,6 +73,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/guru/petugas',PetugasController::class);
         Route::resource('/guru/pelanggaran',PelanggaranController::class);
         Route::resource('/guru/tanggapan',TanggapanController::class);
+
+        Route::delete('/guru/siswa/{id}',[SiswaController::class,'destroy']);
+        Route::get('/guru/siswa/{id}',[SiswaController::class,'edit']);
+        Route::put('/guru/siswa/{id}',[SiswaController::class,'update']);
 
         Route::get('/guru/siswa', [SiswaController::class, 'search'])->name('search');
         });

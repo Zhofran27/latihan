@@ -12,6 +12,7 @@ class Tanggapan extends Model
     use HasFactory;
     protected $guarded = ['id'];
     protected $table = 'tanggapan';
+    public $timestamps = false;
 
     public function pelanggaran():BelongsTo
     {

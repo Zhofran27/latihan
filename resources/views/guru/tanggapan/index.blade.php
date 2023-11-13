@@ -7,9 +7,13 @@
 	<title>Aplikasi siswa</title>
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet"> </head>
 
-<body> @include('layouts.headguru')
+<body> 
+	@include('sweetalert::alert')
+	@include('layouts.headguru')
 	<div class="container">
-		<h3 class="mt-4">Data Siswa</h3>
+		<h3 class="mt-4">Data Siswa
+			<a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#tambah">Tambah</a>
+		</h3>
 		<form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search" method="get" action="/guru/siswa"> Cari data &nbsp;
 			<input type="text" name="search" class="form-control w-75 d-inline" id="search" placeholder="Masukkan Nama Siswa"> </form>
 		<br> @if ($data->isNotEmpty())

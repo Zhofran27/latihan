@@ -21,25 +21,28 @@
     <h3 class="mt-4">History Data Input Pelanggaran (trigger)</h3>
     @if ($data->isNotEmpty())
     <table class="table table-striped table-bordered">
-    <tr>
-    <th>No</th>
-    <th>NIS</th>
-    <th>ID_Pelanggaran</th>
-    <th>Waktu</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php $no=1;?>
-    @foreach ($data as $dt)
-    <tr>
-    <td>{{ $no++ }}</td>
-    <td>{{$dt->nis}}</td>
-    <td>{{$dt->id_pelanggaran}}</td>
-    <td>{{$dt->tanggal}}</td>
-    </tr>
-    @endforeach
-    </tbody>
-    
+        <tr>
+            <th>No</th>
+            <th>NIS</th>
+            <th>ID_Pelanggaran</th>
+            <th>Waktu</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $no=1;?>
+        @foreach ($data as $dt)
+        <tr>
+            <td>{{ $no++ }}</td>
+            <td>{{$dt->nis}}</td>
+            <td>{{$dt->id_pelanggaran}}</td>
+            <td>{{$dt->tanggal}}</td>
+        </tr>
+
+
+        
+
+        @endforeach
+        </tbody>
     </table>
     
     </div>

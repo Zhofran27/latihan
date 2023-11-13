@@ -7,6 +7,7 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/jquery.js')}}"></script>
+    <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
 </head>
 
 <body>
